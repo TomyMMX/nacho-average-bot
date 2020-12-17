@@ -5,6 +5,7 @@
   "author": "Tomaz <tomaz@celtra.com>",
   "description": "The perfectly average douchebag Slack companion",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "hubot": "^3.3.2",
     "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",

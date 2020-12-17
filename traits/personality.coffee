@@ -1,20 +1,29 @@
 # Description:
-#  This file reresents Nachos' main personality.
-#  Here anything is welcomed that does not interfere with the main functionality in other scripts.
+#   This file reresents Nachos' main personality.
+#   Here anything is welcomed that does not interfere with the main functionality in other scripts.
 #
-# These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
+#   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
-module.exports = (robot) ->
-  robot.respond /Hi/i, (res) ->
-    res.send "Hi, I am Average, Nacho Average. Nice to meet you @#{res.message.user.name}"
+respond = (robot, res) ->
+    if !res.message.text?.match(robot.respondPattern(''))
+        return false
 
-  robot.respond /open the (.*) doors/i, (res) ->
-    doorType = res.match[1]
-    if doorType is "pod bay"
-      res.reply "I'm afraid I can't let you do that."
-    else
-      res.reply "Opening #{doorType} doors"
+    if res.message.rawMessage.text?.match(/^Hi/i)
+        res.send "Hi, I am Average, Nacho Average. Nice to meet you @#{res.message.user.name}"
+        return true
 
+    match = res.message.text?.match(/open the (.*) doors/i)
+    if match
+        doorType = match[1]
+        if doorType is "pod bay"
+            res.reply "I'm afraid I can't let you do that."
+        else
+            res.reply "Opening #{doorType} doors"
+        return true
+
+    return false
+
+module.exports = { respond }
 
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
