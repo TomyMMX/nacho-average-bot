@@ -8,7 +8,7 @@ respond = (robot, res) ->
     message = {
         message : {
             message: res.message.rawMessage.text,
-            chatBotID: 16869, #162159,
+            chatBotID: 162159,
             timestamp: Math.floor(new Date().getTime() / 1000),
         },
         user: {
@@ -23,8 +23,14 @@ respond = (robot, res) ->
 
     url = "https://www.personalityforge.com/api/chat/?apiKey=" + apiKey + "&hash=" + hash + "&message=" + encodeURI(messageJSON)
     robot.http(url).get() (err, response, body) ->
+        # robot.messageRoom "D01HEHW3TSM", "Debug: " + body
+
         msg = JSON.parse body
-        res.send msg.message.message
+
+        if msg.success == 1
+            res.send msg.message.message
+        else
+            res.send "shshshshshshshhshs... I ... can...can't... shshshs... hear .... driving .... tunnel .... shhshshsh ..."
 
     return true
 

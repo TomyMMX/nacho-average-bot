@@ -11,9 +11,11 @@ externalBot = require('../traits/external-bot')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
-        if personality.respond robot, context.response
-            done()
+        if !context.response.message.rawMessage
+            next(done)
         else if carolSinger.detect robot, context.response
+            done()
+        else if personality.respond robot, context.response
             done()
         else if badWords.detect robot, context.response
             done()
