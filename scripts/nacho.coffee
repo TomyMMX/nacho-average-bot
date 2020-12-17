@@ -21,3 +21,6 @@ module.exports = (robot) ->
             done()
         else
             next(done)
+
+    robot.hear /nacho/i, (res) ->
+        res.send "Don't talk about me behind my back."

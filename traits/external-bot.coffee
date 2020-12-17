@@ -2,6 +2,9 @@ apiKey = process.env.HUBOT_PERSONALITY_API_KEY
 apiSecret = process.env.HUBOT_PERSONALITY_API_SECRET
 
 respond = (robot, res) ->
+    if !res.message.text?.match(robot.respondPattern(''))
+        return false
+
     message = {
         message : {
             message: res.message.rawMessage.text,
