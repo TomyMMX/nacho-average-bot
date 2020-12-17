@@ -8,6 +8,7 @@ personality = require('../traits/personality')
 carolSinger = require('../traits/carol-singer')
 badWords = require('../traits/bad-words')
 externalBot = require('../traits/external-bot')
+tldr = require('../traits/tldr')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
@@ -18,6 +19,8 @@ module.exports = (robot) ->
         else if badWords.detect robot, context.response
             done()
         else if externalBot.respond robot, context.response
+            done()
+        else if tldr.respond robot, context.response
             done()
         else
             next(done)
