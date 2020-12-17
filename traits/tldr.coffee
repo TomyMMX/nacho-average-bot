@@ -32,6 +32,4 @@ detect = (robot, res) ->
     else 
     	console.log "All good, you're within limits"
 
-res = "Danes je bila na oknu ena jingle bells "
-detect(null, res)
-detect(null, res)
+module.exports = { detect }
