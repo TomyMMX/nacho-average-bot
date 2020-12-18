@@ -10,11 +10,14 @@ badWords = require('../traits/bad-words')
 externalBot = require('../traits/external-bot')
 recipe = require('../traits/recipe')
 pug = require('../traits/pug')
+tldr = require('../traits/tldr')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
         if !context.response.message.rawMessage
             next(done)
+        else if tldr.respond robot, context.response
+            done()
         else if carolSinger.detect robot, context.response
             done()
         else if personality.respond robot, context.response
