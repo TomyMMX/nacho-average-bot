@@ -12,6 +12,9 @@ recipe = require('../traits/recipe')
 pug = require('../traits/pug')
 tldr = require('../traits/tldr')
 dadJokes = require('../traits/dad-jokes')
+donke = require('../traits/donke')
+marketing = require('../traits/marketing')
+covid = require('../traits/covid')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
