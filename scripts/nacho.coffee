@@ -16,7 +16,7 @@ module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
         if !context.response.message.rawMessage
             next(done)
-        else if tldr.respond robot, context.response
+        else if tldr.detect robot, context.response
             done()
         else if carolSinger.detect robot, context.response
             done()
