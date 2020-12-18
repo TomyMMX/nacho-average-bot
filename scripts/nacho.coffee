@@ -8,6 +8,8 @@ personality = require('../traits/personality')
 carolSinger = require('../traits/carol-singer')
 badWords = require('../traits/bad-words')
 externalBot = require('../traits/external-bot')
+recipe = require('../traits/recipe')
+pug = require('../traits/pug')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
@@ -19,10 +21,15 @@ module.exports = (robot) ->
             done()
         else if badWords.detect robot, context.response
             done()
+        else if pug.detect robot, context.response
+            done()
         else if externalBot.respond robot, context.response
             done()
         else
             next(done)
+
+    robot.responseMiddleware (context, next, done) ->
+        recipe.inject robot, context, next
 
     robot.hear /nacho/i, (res) ->
         res.send "Don't talk about me behind my back."
