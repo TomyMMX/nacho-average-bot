@@ -9,27 +9,25 @@ tldr = "Do you really\n
         gibberish?\n
         Don't be a fucking boomer and use an emoji or a gif\n
         Like all normal people do!\n
-        Now GTFO with your nonsense\n"
-                   
+        Now GTFO with your nonsense"
 
 line = 0
-tldrToWrite = null
-
-writeTldr = () ->
-  arrayOfLyricLines = tldrToWrite.split('\n')
-  console.log arrayOfLyricLines[line]
-  line += 1
-  if line < arrayOfLyricLines.length
-  	setTimeout(writeTldr, 1000)
-  else
-  	line = 0
-  	tldrToWrite = null
 
 detect = (robot, res) ->
-    if res?.length > 100
-    	tldrToWrite = tldr
-    	setTimeout(writeTldr, 1000)
-    else 
-    	console.log "All good, you're within limits"
+    writeTldr = () ->
+        if line == 0
+            res.reply "TLDR; ??"
+        lines = tldr.split('\n')
+        res.send lines[line]
+        line += 1
+        if line < lines.length
+            setTimeout(writeTldr, 600)
+
+    if res.message.rawMessage.text?.length > 100
+        line = 0
+        setTimeout(writeTldr, 1000)
+        return true
+
+    return false
 
 module.exports = { detect }
