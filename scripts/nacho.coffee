@@ -39,3 +39,9 @@ module.exports = (robot) ->
 
     robot.hear /nacho/i, (res) ->
         res.send "Don't talk about me behind my back."
+
+    robot.hear /weather|vreme/i, (res) -> 
+        res.send "Don't you have something more meaningful to talk about?"
+
+    robot.hear /'talk to me'/i (res) -> 
+        res.send "Don't you have other friends to bore them with your sutff? #foreeverAlone"

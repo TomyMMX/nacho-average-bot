@@ -13,8 +13,8 @@ message = process.argv[3]
 trait = require('../traits/' + traitFile)
 
 res = {
-    reply: console.log,
-    send: console.log,
+    reply: console.log
+    send: console.log
     message: {
         text: message
         rawMessage : {
