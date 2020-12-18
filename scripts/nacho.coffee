@@ -11,26 +11,41 @@ externalBot = require('../traits/external-bot')
 recipe = require('../traits/recipe')
 pug = require('../traits/pug')
 tldr = require('../traits/tldr')
-dadJokes = require('../traits/dad-jokes')
+covid = require('../traits/covid')
 randSong = require('../traits/rand-song')
+dadJokes = require('../traits/dad-jokes')
+marketing = require('../traits/marketing')
+donke = require('../traits/donke')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
         if !context.response.message.rawMessage
             next(done)
+            return
+
+        if !context.response.message.user.name
+            done()
+            return
+
+        if personality.respond robot, context.response
+            done()
         else if tldr.detect robot, context.response
             done()
         else if randSong.detect robot, context.response
             done()
-        else if carolSinger.detect robot, context.response
+        else if marketing.detect robot, context.response
             done()
-        else if personality.respond robot, context.response
+        else if carolSinger.detect robot, context.response
             done()
         else if badWords.detect robot, context.response
             done()
+        else if donke.detect robot, context.response
+            done()
         else if pug.detect robot, context.response
             done()
-        else if dadJokes.respond robot, context.response
+        else if covid.detect robot, context.response
+            done()
+        else if dadJokes.detect robot, context.response
             done()
         else if externalBot.respond robot, context.response
             done()
@@ -43,8 +58,5 @@ module.exports = (robot) ->
     robot.hear /nacho/i, (res) ->
         res.send "Don't talk about me behind my back."
 
-    robot.hear /weather|vreme/i, (res) -> 
-        res.send "Don't you have something more meaningful to talk about?"
-
-    robot.hear /'talk to me'/i (res) -> 
-        res.send "Don't you have other friends to bore them with your sutff? #foreeverAlone"
+    robot.hear /weather|vreme/i, (res) ->
+        res.send "Don't you have something more meaningful than the weather to talk about?"

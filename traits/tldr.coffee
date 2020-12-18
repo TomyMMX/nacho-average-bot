@@ -23,7 +23,7 @@ detect = (robot, res) ->
         if line < lines.length
             setTimeout(writeTldr, 600)
 
-    if res.message.rawMessage.text?.length > 100
+    if res.message.rawMessage && res.message.rawMessage.text?.length > 100
         line = 0
         setTimeout(writeTldr, 1000)
         return true
