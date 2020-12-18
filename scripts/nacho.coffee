@@ -11,6 +11,7 @@ externalBot = require('../traits/external-bot')
 recipe = require('../traits/recipe')
 pug = require('../traits/pug')
 tldr = require('../traits/tldr')
+dadJokes = require('../traits/dad-jokes')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
@@ -25,6 +26,8 @@ module.exports = (robot) ->
         else if badWords.detect robot, context.response
             done()
         else if pug.detect robot, context.response
+            done()
+        else if dadJokes.respond robot, context.response
             done()
         else if externalBot.respond robot, context.response
             done()

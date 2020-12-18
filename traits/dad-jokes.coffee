@@ -1,11 +1,12 @@
 ## WORK IN PROGRESS / ideation phase
 detect = (robot, res) ->
-    if res.message.text?.match(/joke/i)
-    	robot.http("https://icanhazdadjoke.com/search?term=hipster")
+    if res.message.text?.match(/joke|jokes|funny|sala|vic|/i)
+    	robot.http("https://icanhazdadjoke.com/")
       .header('Accept', 'application/json')
       .get() (err, response, body) ->
-      	console.log body
-    else 
-    	console.log "No joke for you today"
+      	res.send JSON.parse(body).joke 
+    return false
+
 
 module.exports = { detect }
+
