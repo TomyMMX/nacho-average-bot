@@ -22,6 +22,11 @@ res = {
         }
     }
 }
+
+ctx = {
+    strings: [ message ]
+}
+
 robot = {
     respondPattern: (s) -> /^nacho/i
     http: (url, options) -> HttpClient.create(url, options).header('User-Agent', 'Hubot/123')
@@ -29,3 +34,4 @@ robot = {
 
 
 trait.detect(robot, res)
+#trait.inject(robot, ctx)

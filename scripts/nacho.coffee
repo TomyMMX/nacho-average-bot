@@ -12,15 +12,15 @@ recipe = require('../traits/recipe')
 pug = require('../traits/pug')
 tldr = require('../traits/tldr')
 dadJokes = require('../traits/dad-jokes')
-donke = require('../traits/donke')
-marketing = require('../traits/marketing')
-covid = require('../traits/covid')
+randSong = require('../traits/rand-song')
 
 module.exports = (robot) ->
     robot.receiveMiddleware (context, next, done) ->
         if !context.response.message.rawMessage
             next(done)
         else if tldr.detect robot, context.response
+            done()
+        else if randSong.detect robot, context.response
             done()
         else if carolSinger.detect robot, context.response
             done()

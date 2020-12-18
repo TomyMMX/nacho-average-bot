@@ -139,7 +139,7 @@ detect = (robot, res) ->
         # We ignore all messages until the song is done
         return true
 
-    if text?.match(/bela snežinka/i)
+    if text?.match(/bela sne[ž|z]inka/i)
         res.send "Here is the sing-a-long for Bela Snežinka: https://www.youtube.com/watch?v=kCMHxUrCaHE"
         res.send "I really like it and you can join me while I sing it ;)"
         doCarol belaSnezinkaLyric
